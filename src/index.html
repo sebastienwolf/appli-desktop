@@ -7,66 +7,11 @@
     <title>Géolocalisation</title>
   </head>
   <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
-
-    <h1>Géolocalisation</h1>
-
+    <h1 id="city-name"></h1>
+    <canvas id="temperature-chart" width="400" height="200"></canvas>
     <div id="weather-cards"></div>
 
-
-    <script>
-     const lat = "43.296482";
-const lon = "5.36978";
-const apikey = "ce594e43db947220ca66ff854126f346";
-
-const apiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=metric"+ "&lang=fr" + "&appid=" + apikey;
-console.log(apiUrl);
-
-async function getWeather() {
-  const reponse = await fetch(apiUrl);
-  const temp = await reponse.json();
-  console.log(temp);
-
-  const data = [];
-
-  temp.list.forEach(element => {
-    const info = [];
-    info.push(element.dt_txt)
-    info.push(element.main.temp)
-    info.push(element.weather[0].description)
-    data.push(info)
-   
-  });
-  console.log(data)
-
-
-  // Créez des cartes pour afficher les données
-  const weatherCards = document.getElementById("weather-cards");
-
-  data.forEach(info => {
-  const card = document.createElement("div");
-  card.classList.add("card");
-
-  const date = document.createElement("p");
-  date.textContent = `Date: ${info[0]}`;
-
-  const temperature = document.createElement("p");
-  temperature.textContent = `Temperature: ${info[1]}°C`;
-
-  const description = document.createElement("p");
-  description.textContent = `Description: ${info[2]}`;
-
-  card.appendChild(date);
-  card.appendChild(temperature);
-  card.appendChild(description);
-
-  weatherCards.appendChild(card);
-});
-}
-
-
-getWeather();
-  </script>
+    <script src="./getMeteo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </body>
 </html>
